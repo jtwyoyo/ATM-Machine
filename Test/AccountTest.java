@@ -1,3 +1,6 @@
+/* Copyright (C) 2023 <Full Name (can be multiple persons) - All Rights Reserved
+* You may use, distribute and modify this code under the terms of the XYZ license. */
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
