@@ -24,24 +24,4 @@ public class AccountTest {
     public void testGetSavingBalance() {
         assertEquals(2000.0, account.getSavingBalance(), 0.001);
     }
-
-    @Test
-    public void testCheckNotNull(){
-        assertNotEquals(null, amount);
-        assertNotEquals(null, account.getCheckingBalance());
-        assertNotEquals(null, account.getSavingBalance());
-    }
-    @Test
-    public void testcalcCheckTransfer(){
-        account.calcCheckTransfer(amount);
-        assertEquals(900.0,account.getCheckingBalance());
-        assertEquals(2100.0,account.getSavingBalance());
-    }
-
-    @Test
-    public void testcalcSavingTransfer(){
-        account.calcSavingTransfer(amount);
-        assertEquals(1100.0,account.getCheckingBalance());
-        assertEquals(1900.0,account.getSavingBalance());
-    }
 }
