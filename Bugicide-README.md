@@ -110,14 +110,14 @@ public void calcSavingTransfer(double amount) {
             - Partition characteristics
 
               | Characteristics                  | b1   | b2    |
-                      |----------------------------------|------|-------|
+              |----------------------------------|------|-------|
               | C1 = amount is not null          | True | False |
               | C2 = checkingBalance is not null | True | False |
               | C3 = savingBalance is not null   | True | False |
             - Identify (possible) values
 
               | Characteristics                  | b1    | b2   |
-                      |----------------------------------|-------|------|
+              |----------------------------------|-------|------|
               | C1 = amount is not null          | 100.0 | null |
               | C2 = checkingBalance is not null | 100.0 | null |
               | C3 = savingBalance is not null   | 100.0 | null |
@@ -128,7 +128,7 @@ public void calcSavingTransfer(double amount) {
             - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit.
 
               | Test                   | C1    | C2     | C3     | Expected result |
-                      |------------------------|-------|--------|--------|-----------------|
+              |------------------------|-------|--------|--------|-----------------|
               | T1(True,True,True)     | 100.0 | 1000.0 | 2000.0 | 1               |
               | T2(False,False,False)  | null  | null   | null   | -1              |
     - **Functionality-based characteristic**
@@ -146,13 +146,13 @@ public void calcSavingTransfer(double amount) {
             - Partition characteristics
 
               | Characteristics                                                         | b1                                                             | b2                                      | b3                                                             |
-                      |-------------------------------------------------------------------------|----------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------|
+              |-------------------------------------------------------------------------|----------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------|
               | C1 = Values of checkingBalance after the calculation with amount value  | checkingBalance value has decreased by the value of the amount | checkingBalance value is still the same | checkingBalance value has increased by the value of the amount |
               | C2 = Values of savingingBalance after the calculation with amount value | savingBalance value has decreased by the value of the amount   | savingBalance value is still the same   | savingBalance value has increased by the value of the amount   |
             - Identify (possible) values
 
               | Characteristics                                                        | b1      | b2     | b3     |
-                      |------------------------------------------------------------------------|---------|--------|--------|
+              |------------------------------------------------------------------------|---------|--------|--------|
               | C1 = Values of checkingBalance after the calculation with amount value | 1,100.0 | 1000.0 | 900.0  |
               | C2 = Values of saving Balance after the calculation with amount value  | 2,100.0 | 2000.0 | 1900.0 |
         - Combine partitions to define test requirements - ECC
@@ -162,7 +162,7 @@ public void calcSavingTransfer(double amount) {
         - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit.
 
           | Test                 | C1      | C2       | Expected Result |
-                |----------------------|---------|----------|-----------------|
+          |----------------------|---------|----------|-----------------|
           | T1(1,100.0, 1,900.0) | 1,100.0 | 1900.0   | 1               |
           | T2(1000.0, 2000.0)   | 1,000.0 | 2000.0   | -1              |
           | T3(900, 2,100)       | 900.0   | 2,100.0  | -1              |
