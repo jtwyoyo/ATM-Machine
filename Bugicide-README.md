@@ -168,6 +168,86 @@ public void calcSavingTransfer(double amount) {
           | T3(900, 2,100)       | 900.0   | 2,100.0  | -1              |
 
 ### Third Test Case
+```
+public double calcCheckingWithdraw(double amount) {
+		checkingBalance = (checkingBalance - amount);
+		return checkingBalance;
+	}
+```
+- Name of the test case: testcalcCheckingWithdraw
+- Goal of the test case: To test the method calcCheckWithdraw is correctly calculate and update to the variables (checkingBalance)
+- Characteristics developed using Input Space Partitioning (ISP)
+    - **Interface-based characteristic**
+        - Identify testable functions
+            - calcCheckingWithdraw(double amount)
+        - Identify parameters, return types, return values, and exceptional behavior
+            - Parameters: double amount
+            - Return Type: double
+            - Return value: The current value of checkingBalance
+            - Exceptional behavior: nothing
+        - Model the input domain
+            - Develop characteristics
+                - C1 = relation of amount to 0
+                - C2 = relation of checkingBalance to 0
+            - Partition characteristics
+
+              | Characteristics                       |       b1       |     b2     |     b3      |
+              |---------------------------------------|----------------|------------|-------------|
+              | C1 = relation of amount to 0          | Greater than 0 | Equal to 0 | Less than 0 |
+              | C2 = relation of checkingBalance to 0 | Greater than 0 | Equal to 0 | Less than 0 |
+            - Identify (possible) values
+
+              | Characteristics                       | b1    | b2    | b2     |
+              |---------------------------------------|-------|-------|--------|
+              | C1 = relation of amount to 0          | 100.0 |   0   | -100.0 |
+              | C2 = relation of checkingBalance to 0 | 100.0 |   0   | -100.0 |
+    - **Functionality-based characteristic**
+        - Identify testable functions
+            - calcCheckingWithdraw(double amount)
+        - Identify parameters, return types, return values, and exceptional behavior
+            - Parameters: double amount
+            - Return type: double
+            - Return values: The current value of checkingBalance
+            - Exceptional behavior: nothing
+        - Model the input domain
+            - Develop characteristics
+                - C3 = Comparison between amount and checkingBalance
+            - Partition characteristics 
+
+              | Characteristics                                    |            b1            |            b2            |            b3            |
+              |----------------------------------------------------|--------------------------|--------------------------|--------------------------|
+              | C3 = Comparison between amount and checkingBalance | amount > checkingBalance | amount = checkingBalance | amount < checkingBalance |
+            - Identify (possible) values
+
+              | Characteristics                                    |                   b1                   |                   b2                   |                   b3                   |
+              |----------------------------------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
+              | C3 = Comparison between amount and checkingBalance | amount = 100.0, checkingBalance = 50.0 | amount = 100.0, checkingBalance = 100.0 | amount = 50.0, checkingBalance = 100.0 |
+        - Combine partitions to define test requirements - Pair-Wise **Mix the interface-based and the functionality-based characteristics’ blocks together**
+            - Assumption: Making each pair blocks and choose each block to satisfy each pair
+            - Test requirements: number of tests = 9
+                - Feasibility Tests
+                    - (100.0, 100.0, amount = checkingBalance)
+                    - (0.0, 0.0, amount = checkingBalance)
+                    - (-100.0, -100.0, amount = checkingBalance)
+                    - (100.0, 0.0, amount > checkingBalance)
+                    - (0.0, -100.0, amount > checkingBalance)
+                    - (0.0, 100.0, amount < checkingBalance)
+                    - (-100.0, 0.0, amount < checkingBalance)
+                - Infeasibility Tests
+                    - (100.0, -100.0, amount < checkingBalance)
+                    - (-100.0, 100.0, amount > checkingBalance)
+        - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit. **Mix the interface-based and the functionality-based characteristics’ blocks together**
+
+          | Test                                         | C1       | C2       | C3                       | Expected Result |
+          |----------------------------------------------|----------|----------|--------------------------|-----------------|
+          | T1(100.0, 100.0, amount = checkingBalance)   |   100.0  |   100.0  | amount = checkingBalance |       0.0       |
+          | T2(0.0, 0.0, amount = checkingBalance)       |     0.0  |     0.0  | amount = checkingBalance |       0.0       |
+          | T3(-100.0, -100.0, amount = checkingBalance) |  -100.0  |  -100.0  | amount = checkingBalance |       0.0       |
+          | T4(100.0, 0.0, amount > checkingBalance)     |   100.0  |     0.0  | amount > checkingBalance |     -100.0      |
+          | T5(0.0, -100.0, amount > checkingBalance)    |     0.0  |  -100.0  | amount > checkingBalance |     -100.0      |
+          | T6(0.0, 100.0, amount < checkingBalance)     |     0.0  |   100.0  | amount < checkingBalance |      100.0      |
+          | T7(-100.0, 0.0, amount < checkingBalance)    |  -100.0  |     0.0  | amount < checkingBalance |      100.0      |
+
 ### Fourth Test Case
 ### Fifth Test Case
 ### Sixth Test Case
