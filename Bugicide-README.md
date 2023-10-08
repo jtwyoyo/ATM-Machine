@@ -8,6 +8,22 @@ public void calcCheckTransfer(double amount) {
 		savingBalance = savingBalance + amount;
 	}
 ```
+- Prefix/Postfix Values 
+  - Prefix values
+```
+    @BeforeEach
+    public void setup(){
+    checkingBalance = 1000.0;
+    savingBalance = 2000.0;
+    account = new Account(12345, 6789, checkingBalance, savingBalance);
+    account2 = new Account(6789, 12345, checkingBalance, savingBalance);
+    account3 = new Account(57485, 1478, -1000, -2000);
+    account4 = new Account(45458, 9654, 0, 0);
+    amount = 100.0;
+    amount2 = -100.0;
+    amount3 = 0.0;
+    }
+```
 - Name of the test case: testCalcSavingTransfer
 - Goal of the test case: To test the method calcCheckTransfer is correctly calculate and update to the variables (savingBalance and checkingBalance)
 - Characteristics developed using Input Space Partitioning (ISP)
@@ -21,33 +37,36 @@ public void calcCheckTransfer(double amount) {
       - Exceptional behavior: nothing
     - Model the input domain 
       - Develop characteristics 
-        - C1 = amount is not null 
-        - C2 = checkingBalance is not null 
-        - C3 = savingBalance is not null 
+        - C1 = relation of amount to 0
+        - C2 = relation of checking Balance to 0
+        - C3 = relation of saving Balance to 0 
       - Partition characteristics
 
-        | Characteristics                  | b1   | b2    |
-        |----------------------------------|------|-------|
-        | C1 = amount is not null          | True | False |
-        | C2 = checkingBalance is not null | True | False |
-        | C3 = savingBalance is not null   | True | False |
+        | Characteristics                        | b1          | b2         | b3              |
+        |----------------------------------------|-------------|------------|-----------------|
+        | C1 = relation of amount to 0           | Less than 0 | Equal to 0 | Greater than 0  |
+        | C2 = relation of checking Balance to 0 | Less than 0 | Equal to 0 | Greater than 0  |
+        | C3 = relation of saving Balance to 0   | Less than 0 | Equal to 0 | Greater than 0  |
       - Identify (possible) values
-      
-        | Characteristics                  | b1    | b2   |
-        |----------------------------------|-------|------|
-        | C1 = amount is not null          | 100.0 | null |
-        | C2 = checkingBalance is not null | 100.0 | null |
-        | C3 = savingBalance is not null   | 100.0 | null |
+
+        | Characteristics                        | b1      | b2   | b3     |
+        |----------------------------------------|---------|------|--------|
+        | C1 = relation of amount to 0           | -100.0  | 0.0  | 100.0  |
+        | C2 = relation of checking Balance to 0 | -1000.0 | 0.0  | 1000.0 |
+        | C3 = relation of saving Balance to 0   | -2000.0 | 0.0  | 2000.0 |
       - Combine partitions to define test requirements -ECC 
         - Assumption: choose Each choice 
-        - Test requirements: number of tests = 2
-          - (True,True,True), (False,False,False)
+        - Test requirements: number of tests = 3 
+          - T1(Less than 0,Less than 0, Less than 0),
+          - T2(Equal to 0, Equal to 0, Equal to 0),
+          - T3(Greater than 0, Greater than 0,Greater than 0)
       - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit.
       
-        | Test                   | C1    | C2     | C3     | Expected result |
-        |------------------------|-------|--------|--------|-----------------|
-        | T1(True,True,True)     | 100.0 | 1000.0 | 2000.0 | 1               |
-        | T2(False,False,False)  | null  | null   | null   | -1              |
+        | Test                                              | amount | Expected Result                                                         |
+        |---------------------------------------------------|--------|-------------------------------------------------------------------------|
+        | T1(Less than 0,Less than 0, Less than 0)          | -100.0 | True(amount = -100.0,checkingBalance = -1000.0,savingBalance = -2000.0) | 
+        | T2(Equal to 0, Equal to 0, Equal to 0)            | 0.0    | True(amount = 0.0,checkingBalance = 0.0,savingBalance = 0.0)            |
+        | T3(Greater than 0, Greater than 0,Greater than 0) | 100.0  | True(amount = 100.0,checkingBalance = 1000.0,savingBalance = 2000.0)    |
   - **Functionality-based characteristic** 
     - Identify testable functions
       - calcCheckTransfer(double amount)
@@ -58,31 +77,31 @@ public void calcCheckTransfer(double amount) {
       - Exceptional behavior: nothing
     - Model the input domain
       - Develop characteristics 
-        - C1 = Values of checkingBalance after the calculation with amount value. 
-        - C2 = Values of savingBalance after the calculation with amount value. 
+        - C1 = Values of checkingBalance after call calcCheckTransfer method < old checkingBalance 
+        - C2 = Values of savingBalance after call calcCheckTransfer method > old savingBalance.
       - Partition characteristics
-        
-        | Characteristics                                                         | b1                                                             | b2                                      | b3                                                             |
-        |-------------------------------------------------------------------------|----------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------|
-        | C1 = Values of checkingBalance after the calculation with amount value  | checkingBalance value has decreased by the value of the amount | checkingBalance value is still the same | checkingBalance value has increased by the value of the amount |
-        | C2 = Values of savingingBalance after the calculation with amount value | savingBalance value has decreased by the value of the amount   | savingBalance value is still the same   | savingBalance value has increased by the value of the amount   |
+
+        | Characteristics                                                                          | b1   | b2    |
+        |------------------------------------------------------------------------------------------|------|-------|
+        | C1 = Values of checkingBalance after call calcCheckTransfer method < old checkingBalance | True | False |
+        | C2 = Values of savingBalance after call calcCheckTransfer method > old savingBalance     | True | False |
       - Identify (possible) values
-      
-        | Characteristics                                                        | b1      | b2     | b3     |
-        |------------------------------------------------------------------------|---------|--------|--------|
-        | C1 = Values of checkingBalance after the calculation with amount value | 1,100.0 | 1000.0 | 900.0  |
-        | C2 = Values of saving Balance after the calculation with amount value  | 2,100.0 | 2000.0 | 1900.0 |
+
+        | Characteristics                                                                          | b1    | b2     |
+        |------------------------------------------------------------------------------------------|-------|--------|
+        | C1 = Values of checkingBalance after call calcCheckTransfer method < old checkingBalance | 100.0 | -100.0 |
+        | C2 = Values of savingBalance after call calcCheckTransfer method > old savingBalance     | 100.0 | -100.0 |
     - Combine partitions to define test requirements - ECC 
       - Assumption: choose Each choice 
-      - Test requirements - number of tests = 3
-        - (1,100.0, 1,900.0), (1000.0, 2000.0), (900, 2,100)
+      - Test requirements - number of tests = 2
+        - T1(True,True)
+        - T2(False,False)
     - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit.
-    
-      | Test                 | C1      | C2       | Expected Result |
-      |----------------------|---------|----------|-----------------|
-      | T1(1,100.0, 1,900.0) | 1,100.0 | 1900.0   | -1              |
-      | T2(1000.0, 2000.0)   | 1,000.0 | 2000.0   | -1              |
-      | T3(900, 2,100)       | 900.0   | 2,100.0  | 1               |
+
+      | Test             | C1     | Expected Result                                           |
+      |------------------|--------|-----------------------------------------------------------|
+      | T1(True,True)    | 100.0  | True(checkingBalance = 900.0, savingBalance = 2,100.0)    |
+      | T2(False,False)  | -100.0 | False(checkingBalance = 1,100.0, savingBalance = 1,900.0) |
 
 ### Second Test Case
 ```
@@ -90,6 +109,22 @@ public void calcSavingTransfer(double amount) {
 		savingBalance = savingBalance - amount;
 		checkingBalance = checkingBalance + amount;
 	}
+```
+- Prefix/Postfix Values
+- Prefix values
+```
+  @BeforeEach
+  public void setup(){
+  checkingBalance = 1000.0;
+  savingBalance = 2000.0;
+  account = new Account(12345, 6789, checkingBalance, savingBalance);
+  account2 = new Account(6789, 12345, checkingBalance, savingBalance);
+  account3 = new Account(57485, 1478, -1000, -2000);
+  account4 = new Account(45458, 9654, 0, 0);
+  amount = 100.0;
+  amount2 = -100.0;
+  amount3 = 0.0;
+  }
 ```
 - Name of the test case: testCalcSavingTransfer
 - Goal of the test case: To test the method calcCheckTransfer is correctly calculate and update to the variables (savingBalance and checkingBalance)
@@ -104,68 +139,72 @@ public void calcSavingTransfer(double amount) {
             - Exceptional behavior: nothing
         - Model the input domain
             - Develop characteristics
-                - C1 = amount is not null
-                - C2 = checkingBalance is not null
-                - C3 = savingBalance is not null
-            - Partition characteristics
+                - C1 = relation of amount to 0 
+                - C2 = relation of checking Balance to 0 
+                - C3 = relation of saving Balance to 0
+      - Partition characteristics
 
-              | Characteristics                  | b1   | b2    |
-              |----------------------------------|------|-------|
-              | C1 = amount is not null          | True | False |
-              | C2 = checkingBalance is not null | True | False |
-              | C3 = savingBalance is not null   | True | False |
-            - Identify (possible) values
+        | Characteristics                        | b1          | b2         | b3              |
+        |----------------------------------------|-------------|------------|-----------------|
+        | C1 = relation of amount to 0           | Less than 0 | Equal to 0 | Greater than 0  |
+        | C2 = relation of checking Balance to 0 | Less than 0 | Equal to 0 | Greater than 0  |
+        | C3 = relation of saving Balance to 0   | Less than 0 | Equal to 0 | Greater than 0  |
+      - Identify (possible) values
+              
+        | Characteristics                        | b1      | b2   | b3     |
+        |----------------------------------------|---------|------|--------|
+        | C1 = relation of amount to 0           | -100.0  | 0.0  | 100.0  |
+        | C2 = relation of checking Balance to 0 | -1000.0 | 0.0  | 1000.0 |
+        | C3 = relation of saving Balance to 0   | -2000.0 | 0.0  | 2000.0 |
+      - Combine partitions to define test requirements -ECC
+          - Assumption: choose Each choice
+          - Test requirements: number of tests = 3
+              - T1(Less than 0,Less than 0, Less than 0), 
+              - T2(Equal to 0, Equal to 0, Equal to 0), 
+              - T3(Greater than 0, Greater than 0,Greater than 0)
+      - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit.
 
-              | Characteristics                  | b1    | b2   |
-              |----------------------------------|-------|------|
-              | C1 = amount is not null          | 100.0 | null |
-              | C2 = checkingBalance is not null | 100.0 | null |
-              | C3 = savingBalance is not null   | 100.0 | null |
-            - Combine partitions to define test requirements -ECC
-                - Assumption: choose Each choice
-                - Test requirements: number of tests = 2
-                    - (True,True,True), (False,False,False)
-            - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit.
+        | Test                                              | amount | Expected Result                                                         |
+        |---------------------------------------------------|--------|-------------------------------------------------------------------------|
+        | T1(Less than 0,Less than 0, Less than 0)          | -100.0 | True(amount = -100.0,checkingBalance = -1000.0,savingBalance = -2000.0) |
+        | T2(Equal to 0, Equal to 0, Equal to 0)            | 0.0    | True(amount = 0.0,checkingBalance = 0.0,savingBalance = 0.0)            |
+        | T3(Greater than 0, Greater than 0,Greater than 0) | 100.0  | True(amount = 100.0,checkingBalance = 1000.0,savingBalance = 2000.0)    |
+  - **Functionality-based characteristic**
+      - Identify testable functions
+          - calcCheckTransfer(double amount)
+      - Identify parameters, return types, return values, and exceptional behavior
+          - Parameters: double
+          - Return type: nothing
+          - Return values: nothing
+          - Exceptional behavior: nothing
+      - Model the input domain
+          - Develop characteristics
+              - C1 = Values of checkingBalance after call calcCheckTransfer method > old checkingBalance
+              - C2 = Values of savingBalance after call calcCheckTransfer method < old savingBalance.
+          - Partition characteristics
 
-              | Test                   | C1    | C2     | C3     | Expected result |
-              |------------------------|-------|--------|--------|-----------------|
-              | T1(True,True,True)     | 100.0 | 1000.0 | 2000.0 | 1               |
-              | T2(False,False,False)  | null  | null   | null   | -1              |
-    - **Functionality-based characteristic**
-        - Identify testable functions
-            - calcCheckTransfer(double amount)
-        - Identify parameters, return types, return values, and exceptional behavior
-            - Parameters: double
-            - Return type: nothing
-            - Return values: nothing
-            - Exceptional behavior: nothing
-        - Model the input domain
-            - Develop characteristics
-                - C1 = Values of checkingBalance after the calculation with amount value.
-                - C2 = Values of savingBalance after the calculation with amount value.
-            - Partition characteristics
+            | Characteristics                                                                          | b1   | b2    |
+            |------------------------------------------------------------------------------------------|------|-------|
+            | C1 = Values of checkingBalance after call calcCheckTransfer method > old checkingBalance | True | False |
+            | C2 = Values of savingBalance after call calcCheckTransfer method < old savingBalance     | True | False |
+          - Identify (possible) values
 
-              | Characteristics                                                         | b1                                                             | b2                                      | b3                                                             |
-              |-------------------------------------------------------------------------|----------------------------------------------------------------|-----------------------------------------|----------------------------------------------------------------|
-              | C1 = Values of checkingBalance after the calculation with amount value  | checkingBalance value has decreased by the value of the amount | checkingBalance value is still the same | checkingBalance value has increased by the value of the amount |
-              | C2 = Values of savingingBalance after the calculation with amount value | savingBalance value has decreased by the value of the amount   | savingBalance value is still the same   | savingBalance value has increased by the value of the amount   |
-            - Identify (possible) values
+            | Characteristics                                                                          | b1    | b2     |
+            |------------------------------------------------------------------------------------------|-------|--------|
+            | C1 = Values of checkingBalance after call calcCheckTransfer method > old checkingBalance | 100.0 | -100.0 |
+            | C2 = Values of savingBalance after call calcCheckTransfer method < old savingBalance     | 100.0 | -100.0 |
+      - Combine partitions to define test requirements - ECC
+          - Assumption: choose Each choice
+          - Test requirements - number of tests = 2
+              - T1(True,True)
+              - T2(False,False)
+      - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit.
 
-              | Characteristics                                                        | b1      | b2     | b3     |
-              |------------------------------------------------------------------------|---------|--------|--------|
-              | C1 = Values of checkingBalance after the calculation with amount value | 1,100.0 | 1000.0 | 900.0  |
-              | C2 = Values of saving Balance after the calculation with amount value  | 2,100.0 | 2000.0 | 1900.0 |
-        - Combine partitions to define test requirements - ECC
-            - Assumption: choose Each choice
-            - Test requirements - number of tests = 3
-                - (1,100.0, 1,900.0), (1000.0, 2000.0), (900, 2,100)
-        - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit.
+        | Test             | C1     | Expected Result                                          |
+        |------------------|--------|----------------------------------------------------------|
+        | T1(True,True)    | 100.0  | True(checkingBalance = 1,100.0, savingBalance = 1,900.0) |
+        | T2(False,False)  | -100.0 | False(checkingBalance = 900.0, savingBalance = 2,100.0)  |
 
-          | Test                 | C1      | C2       | Expected Result |
-          |----------------------|---------|----------|-----------------|
-          | T1(1,100.0, 1,900.0) | 1,100.0 | 1900.0   | 1               |
-          | T2(1000.0, 2000.0)   | 1,000.0 | 2000.0   | -1              |
-          | T3(900, 2,100)       | 900.0   | 2,100.0  | -1              |
 
 ### Third Test Case
 ```
@@ -219,8 +258,8 @@ public double calcCheckingWithdraw(double amount) {
               | C3 = Comparison between amount and checkingBalance | amount > checkingBalance | amount = checkingBalance | amount < checkingBalance |
             - Identify (possible) values
 
-              | Characteristics                                    |                   b1                   |                   b2                   |                   b3                   |
-              |----------------------------------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
+              | Characteristics                                    |                   b1                   | b2                                      |                   b3                   |
+              |----------------------------------------------------|----------------------------------------|-----------------------------------------|----------------------------------------|
               | C3 = Comparison between amount and checkingBalance | amount = 100.0, checkingBalance = 50.0 | amount = 100.0, checkingBalance = 100.0 | amount = 50.0, checkingBalance = 100.0 |
         - Combine partitions to define test requirements - Pair-Wise **(Mix the interface-based and the functionality-based characteristics’ blocks together)**
             - Assumption: Make each pair of blocks and choose each block to satisfy each pair
