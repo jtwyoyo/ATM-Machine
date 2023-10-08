@@ -175,7 +175,7 @@ public double calcCheckingWithdraw(double amount) {
 	}
 ```
 - Name of the test case: testcalcCheckingWithdraw
-- Goal of the test case: To test the method calcCheckWithdraw is correctly calculate and update to the variables (checkingBalance)
+- Goal of the test case: To test the method calcCheckWithdraw is correctly calculated and updated to the variables (checkingBalance)
 - Characteristics developed using Input Space Partitioning (ISP)
     - **Interface-based characteristic**
         - Identify testable functions
@@ -222,8 +222,8 @@ public double calcCheckingWithdraw(double amount) {
               | Characteristics                                    |                   b1                   |                   b2                   |                   b3                   |
               |----------------------------------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
               | C3 = Comparison between amount and checkingBalance | amount = 100.0, checkingBalance = 50.0 | amount = 100.0, checkingBalance = 100.0 | amount = 50.0, checkingBalance = 100.0 |
-        - Combine partitions to define test requirements - Pair-Wise (**Mix the interface-based and the functionality-based characteristics’ blocks together**)
-            - Assumption: Making each pair blocks and choose each block to satisfy each pair
+        - Combine partitions to define test requirements - Pair-Wise **(Mix the interface-based and the functionality-based characteristics’ blocks together)**
+            - Assumption: Make each pair of blocks and choose each block to satisfy each pair
             - Test requirements: number of tests = 9
                 - Feasibility Tests
                     - (100.0, 100.0, amount = checkingBalance)
@@ -236,7 +236,7 @@ public double calcCheckingWithdraw(double amount) {
                 - Infeasibility Tests
                     - (100.0, -100.0, amount < checkingBalance)
                     - (-100.0, 100.0, amount > checkingBalance)
-        - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit. (**Mix the interface-based and the functionality-based characteristics’ blocks together**)
+        - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit. **(Mix the interface-based and the functionality-based characteristics’ blocks together)**
 
           | Test                                         | C1       | C2       | C3                       | Expected Result |
           |----------------------------------------------|----------|----------|--------------------------|-----------------|
