@@ -222,8 +222,8 @@ public double calcCheckingWithdraw(double amount) {
               | Characteristics                                    |                   b1                   |                   b2                   |                   b3                   |
               |----------------------------------------------------|----------------------------------------|----------------------------------------|----------------------------------------|
               | C3 = Comparison between amount and checkingBalance | amount = 100.0, checkingBalance = 50.0 | amount = 100.0, checkingBalance = 100.0 | amount = 50.0, checkingBalance = 100.0 |
-        - Combine partitions to define test requirements - Pair-Wise (**Mix the interface-based and the functionality-based characteristics’ blocks together**
-            - Assumption: Making each pair blocks and choose each block to satisfy each pair)
+        - Combine partitions to define test requirements - Pair-Wise (**Mix the interface-based and the functionality-based characteristics’ blocks together**)
+            - Assumption: Making each pair blocks and choose each block to satisfy each pair
             - Test requirements: number of tests = 9
                 - Feasibility Tests
                     - (100.0, 100.0, amount = checkingBalance)
