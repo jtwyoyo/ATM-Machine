@@ -32,4 +32,42 @@ public class TransferTest {
         assertEquals(1100.0,account.getCheckingBalance());
         assertEquals(1900.0,account.getSavingBalance());
     }
+    @Test
+    public void testcalcCheckingWithdraw(){
+        // amount > 0, checkingBalance > 0, amount = checkingBalance
+        test_1_account = new Account(12345, 6789, 100.0, 2000.0);
+        testcheckingBalance = test_1_account.calcCheckingWithdraw(100.0);
+        Assert.assertEquals(0, testcheckingBalance);
+
+        // amount = 0, checkingBalance = 0, amount = checkingBalance
+        test_2_account = new Account(12345, 6789, 0.0, 2000.0);
+        testcheckingBalance = test_2_account.calcCheckingWithdraw(0.0);
+        Assert.assertEquals(0, testcheckingBalance);
+
+        // amount < 0, checkingBalance < 0, amount = checkingBalance
+        test_3_account = new Account(12345, 6789, -100.0, 2000.0);
+        testcheckingBalance = test_3_account.calcCheckingWithdraw(-100.0);
+        Assert.assertEquals(0, testcheckingBalance);
+
+        // amount > 0, checkingBalance = 0, amount > checkingBalance
+        test_4_account = new Account(12345, 6789, 0.0, 2000.0);
+        testcheckingBalance = test_4_account.calcCheckingWithdraw(100.0);
+        Assert.assertEquals(-100.0, testcheckingBalance);
+
+        // amount = 0, checkingBalance < 0, amount > checkingBalance
+        test_5_account = new Account(12345, 6789, -100.0, 2000.0);
+        testcheckingBalance = test_5_account.calcCheckingWithdraw(0.0);
+        Assert.assertEquals(-100.0, testcheckingBalance);
+
+        // amount = 0, checkingBalance > 0, amount < checkingBalance
+        test_6_account = new Account(12345, 6789, 100.0, 2000.0);
+        testcheckingBalance = test_6_account.calcCheckingWithdraw(0.0);
+        Assert.assertEquals(100.0, testcheckingBalance);
+
+        // amount < 0, checkingBalance = 0, amount < checkingBalance
+        test_7_account = new Account(12345, 6789, 0.0, 2000.0);
+        testcheckingBalance = test_7_account.calcCheckingWithdraw(-100.0);
+        Assert.assertEquals(100.0, testcheckingBalance);
+
+    }
 }
