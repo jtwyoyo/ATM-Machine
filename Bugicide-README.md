@@ -359,9 +359,81 @@ public double calcCheckingDeposit(double amount) {
           |----------------------------------------------|----------|----------|-----------------------------|-----------------|
           | T1(50.0, 100.0,  newcheckingBalance > amount)|   100.0  |   100.0  | newcheckingBalance > amount |       200.0     |
           | T2(0.0, 100.0,   newcheckingBalance > amount)|     0.0  |     0.0  | newcheckingBalance > amount |       0.0       |
-          | T3(-50.0, 100.0, newcheckingBalance > amount)|   -50.0  |  -100.0  | newcheckingBalance > amount |       50.0      |
+          | T3(-50.0, 100.0, newcheckingBalance > amount)|   -50.0  |   100.0  | newcheckingBalance > amount |       50.0      |
 
 ### Fifth Test Case
+```
+public double calcSavingDeposit(double amount) {
+		savingBalance = (savingBalance + amount);
+		return savingBalance;
+	}
+```
+- Name of the test case: testcalcSavingDeposit
+- Goal of the test case: The goal of the test case in the provided code is to verify that the calcSavingDeposit method in the Account class correctly updates the checking account balance for various input scenarios.
+    - **Interface-based characteristic**
+        - Identify testable functions
+            - calcSavingDeposit(double amount)
+        - Identify parameters, return types, return values, and exceptional behavior
+            - Parameters: double amount
+            - Return Type: double
+            - Return value: The current value of savingBalance
+            - Exceptional behavior: nothing
+        - Model the input domain
+            - Develop characteristics
+                - C1 = relation of amount to 0
+                - C2 = relation of savingBalance to 0
+            - Partition characteristics
+
+              | Characteristics                       |       b1       |     b2     |     b3      |
+              |---------------------------------------|----------------|------------|-------------|
+              | C1 = relation of amount to 0          | Greater than 0 | Equal to 0 | Less than 0 |
+              | C2 = relation of savingBalance to 0   | Greater than 0 | Equal to 0 | Less than 0 |
+            - Identify (possible) values
+
+              | Characteristics                       | b1    | b2    | b2     |
+              |---------------------------------------|-------|-------|--------|
+              | C1 = relation of amount to 0          | 50.0  |   0   | -50.0  |
+              | C2 = relation of savingBalance to 0   | 100.0 |   0   | -100.0 |
+    - **Functionality-based characteristic**
+        - Identify testable functions
+            - calcSavingDeposit(double amount)
+        - Identify parameters, return types, return values, and exceptional behavior
+            - Parameters: double amount
+            - Return type: double
+            - Return values: The current value of newSavingBalance
+            - Exceptional behavior: nothing
+        - Model the input domain
+            - Develop characteristics
+                - C3 = Comparison between newSavingBalance and amount
+            - Partition characteristics 
+
+              | Characteristics                                     |            b1            |            b2            |            b3            |
+              |---------------------------------------------------- |---------------------------|---------------------------|--------------------------|
+              | C3 = Comparison between newSavingBalance and amount | newSavingBalance > amount | newSavingBalance = amount | newsavingBalance < amount |
+            - Identify (possible) values
+
+              | Characteristics                                    |                   b1                   | b2                                      |                   b3                   |
+              |----------------------------------------------------|----------------------------------------|-----------------------------------------|----------------------------------------|
+              | C3 = Comparison between savingBalance and amount   | savingBalance = 100.0, amount = 50.0   | savingBalance = 100.0, amount = 100.0 | savingBalance = 50.0, amount = 100.0 |
+        - Combine partitions to define test requirements - BCC **(Mix the interface-based and the functionality-based characteristics’ blocks together)**
+            - Assumption: BCC method
+            - Test requirements: number of tests = 7
+                - Feasibility Tests
+                    - (50.0, 100.0,  newSavingBalance > amount)
+                    - (0.0, 100.0,   newSavingBalance > amount)
+                    - (-50.0, 100.0, newSavingBalance > amount)
+                - Infeasibility Tests
+                    - (50.0, 0.0,    newSavingBalance > amount)
+                    - (50.0, -100.0, newSavingBalance > amount)
+                    - (50.0, 100.0,  newSavingBalance = amount)
+                    - (50.0, 100.0,  newSavingBalance < amount)
+        - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit. **(Mix the interface-based and the functionality-based characteristics’ blocks together)**
+
+          | Test                                         | C1       | C2       | C3                        | Expected Result |
+          |----------------------------------------------|----------|----------|---------------------------|-----------------|
+          | T1(50.0, 100.0,  newSavingBalance > amount)	 |   100.0  |   100.0  | newSavingBalance > amount |       200.0     |
+          | T2(0.0, 100.0,   newSavingBalance > amount)  |     0.0  |     0.0  | newSavingBalance > amount |       0.0       |
+          | T3(-50.0, 100.0, newSavingBalance > amount)  |   -50.0  |   100.0  | newSavingBalance > amount |       50.0      |
 ### Sixth Test Case
 ### Seventh Test Case
 ### Eighth Test Case
