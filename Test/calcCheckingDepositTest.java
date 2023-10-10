@@ -1,3 +1,6 @@
+/* Copyright (C) 2023 <Wattanapong Sukchareonchok (can be multiple persons) - All Rights Reserved
+ * You may use, distribute and modify this code under the terms of the XYZ license. */
+
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
