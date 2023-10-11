@@ -729,4 +729,78 @@ public Account(int customerNumber, int pinNumber) {
           |------------------------------------|------------|-------------|----------|----------------|
           | T11(accountA,1234,5678,1000,1000)  |  accountA  |   1234      | 5678     |  TRUE          |
 ### Ninth Test Case
+```
+public int setPinNumber(int pinNumber) {
+		this.pinNumber = pinNumber;
+		return pinNumber;
+	}
+```
+- Name of the test case: SetPinNumberTest
+- Goal of the test case: To verify that the method setPinNumber is correctly updated to the pinNumber variables.
+- Characteristics developed using Input Space Partitioning (ISP)
+    - **Interface-based characteristic**
+        - Identify testable functions
+            - setPinNumber(int pinNumber)
+        - Identify parameters, return types, return values, and exceptional behavior
+            - Parameters: int pinNumber
+            - Return Type: int
+            - Return value: The current value of pinNumber
+            - Exceptional behavior: nothing
+        - Model the input domain
+            - Develop characteristics
+                - C1 = relation of pinNumber to 0
+                  
+            - Partition characteristics
+              | Characteristics                       |       b1       |     b2     |     b3      |
+              |---------------------------------------|----------------|------------|-------------|
+              | C1 = relation of pinNumber to 0       | Greater than 0 | Equal to 0 | Less than 0 |
+              
+            - Identify (possible) values
+              | Characteristics                       | b1    | b2    | b2     |
+              |---------------------------------------|-------|-------|--------|
+              | C1 = relation of pinNumber to 0       | 1234  |   0   | -5678  |
+              
+    - **Functionality-based characteristic**
+        - Identify testable functions
+            - setPinNumber(int pinNumber)
+        - Identify parameters, return types, return values, and exceptional behavior
+            - Parameters: int pinNumber
+            - Return type: int
+            - Return values: The current value of pinNumber
+            - Exceptional behavior: nothing
+        - Model the input domain
+            - Develop characteristics
+                - C2 = Pin number after call setPinNumber method is equal to old Pin number
+                  
+            - Partition characteristics 
+              | Characteristics                                                             |            b1            |            b2            |
+              |-----------------------------------------------------------------------------|--------------------------|--------------------------|
+              | C2 = Pin number after call setPinNumber method is equal to old Pin number   |           True           |           False          |
+              
+            - Identify (possible) values
+              | Characteristics                                                             |                   b1                   | b2                                      |
+              |-----------------------------------------------------------------------------|----------------------------------------|-----------------------------------------|
+              | C2 = Pin number after call setPinNumber method is equal to old Pin number   | 1234                                   | 99999                                   |
+              
+        - Combine partitions to define test requirements - ACOC **(Mix the interface-based and the functionality-based characteristics’ blocks together)**
+            - Assumption: Create pairs of blocks and select each block to meet the requirements of each pair.
+            - Test requirements: number of tests = 6
+                - Feasibility Tests
+                    - (Greater than 0, True)
+                    - (Equal to 0, True)
+                    - (Less than 0, True)
+          
+                 - Infeasibility Tests
+                   - (Greater than 0, False)
+                   - (Equal to 0, False)
+                   - (Less than 0, False)
+                   
+        - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit. **(Mix the interface-based and the functionality-based characteristics’ blocks together)**
+
+          | Test                                         | C1       | C2       |Expected Result |
+          |----------------------------------------------|----------|----------|-----------------|
+          | T1(Greater than 0, True)                     |   1234   |   1234   |      True       |
+          | T2(Equal to 0, True)                         |     0    |    0     |      True       |
+          | T3(Less than 0, True)                        |  -5678   |  -5678   |      True       |
+
 ### Tenth Test case
