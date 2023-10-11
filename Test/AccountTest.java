@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AccountTest {
 
     private Account account;
+    private Double amount = 100.0;
 
     @BeforeEach
     public void setUp() {
