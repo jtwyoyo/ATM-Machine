@@ -435,6 +435,88 @@ public double calcSavingDeposit(double amount) {
           | T2(0.0, 100.0,   newSavingBalance > amount)  |     0.0  |     0.0  | newSavingBalance > amount |       0.0       |
           | T3(-50.0, 100.0, newSavingBalance > amount)  |   -50.0  |   100.0  | newSavingBalance > amount |       50.0      |
 ### Sixth Test Case
+```
+public double calcSavingWithdraw(double amount) {
+		savingBalance = (savingBalance - amount);
+		return savingBalance;
+	}
+```
+- Name of the test case: CalcSavingWithdrawTest
+- Goal of the test case: To verify that the method calcSavingWithdraw is correctly calculated and updated to the savingBalance variables.
+- Characteristics developed using Input Space Partitioning (ISP)
+    - **Interface-based characteristic**
+        - Identify testable functions
+            - calcSavingWithdraw(double amount)
+        - Identify parameters, return types, return values, and exceptional behavior
+            - Parameters: double amount
+            - Return Type: double
+            - Return value: The current value of savingBalance
+            - Exceptional behavior: nothing
+        - Model the input domain
+            - Develop characteristics
+                - C1 = relation of amount to 0
+                - C2 = relation of savingBalance to 0
+                  
+            - Partition characteristics
+              | Characteristics                       |       b1       |     b2     |     b3      |
+              |---------------------------------------|----------------|------------|-------------|
+              | C1 = relation of amount to 0          | Greater than 0 | Equal to 0 | Less than 0 |
+              | C2 = relation of checkingBalance to 0 | Greater than 0 | Equal to 0 | Less than 0 |
+              
+            - Identify (possible) values
+              | Characteristics                       | b1    | b2    | b2     |
+              |---------------------------------------|-------|-------|--------|
+              | C1 = relation of amount to 0          | 100.0 |   0   | -100.0 |
+              | C2 = relation of checkingBalance to 0 | 100.0 |   0   | -100.0 |
+              
+    - **Functionality-based characteristic**
+        - Identify testable functions
+            - calcSavingWithdraw(double amount)
+        - Identify parameters, return types, return values, and exceptional behavior
+            - Parameters: double amount
+            - Return type: double
+            - Return values: The current value of savingBalance
+            - Exceptional behavior: nothing
+        - Model the input domain
+            - Develop characteristics
+                - C3 = Comparison between amount and savingBalance
+                  
+            - Partition characteristics 
+              | Characteristics                                    |            b1            |            b2            |            b3            |
+              |----------------------------------------------------|--------------------------|--------------------------|--------------------------|
+              | C3 = Comparison between amount and savingBalance   | amount > savingBalance | amount = savingBalance | amount < savingBalance |
+              
+            - Identify (possible) values
+              | Characteristics                                    |                   b1                   | b2                                      |                   b3                   |
+              |----------------------------------------------------|----------------------------------------|-----------------------------------------|----------------------------------------|
+              | C3 = Comparison between amount and savingBalance   | amount = 100.0, savingBalance = 50.0 | amount = 100.0, savingBalance = 100.0 | amount = 50.0, savingBalance = 100.0 |
+              
+        - Combine partitions to define test requirements - Pair-Wise **(Mix the interface-based and the functionality-based characteristics’ blocks together)**
+            - Assumption: Create pairs of blocks and select each block to meet the requirements of each pair.
+            - Test requirements: number of tests = 9
+                - Feasibility Tests
+                    - (100.0, 100.0, amount = savingBalance)
+                    - (100.0, 0.0, amount > savingBalance)
+                    - (0.0, 0.0, amount = savingBalance)
+                    - (0.0, -100.0, amount > savingBalance)
+                    - (0.0, 100.0, amount < savingBalance)
+                    - (-100.0, -100.0, amount = savingBalance)
+                    - (-100.0, 0.0, amount < savingBalance)
+                - Infeasibility Tests
+                    - (100.0, -100.0, amount < savingBalance)
+                    - (-100.0, 100.0, amount > savingBalance)
+        - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit. **(Mix the interface-based and the functionality-based characteristics’ blocks together)**
+
+          | Test                                         | C1       | C2       | C3                       | Expected Result |
+          |----------------------------------------------|----------|----------|--------------------------|-----------------|
+          | T1(100.0, 100.0, amount = checkingBalance)   |   100.0  |   100.0  | amount = savingBalance   |        0.0      |
+          | T2(100.0, 0.0, amount > savingBalance)       |   100.0  |     0.0  | amount > savingBalance   |     -100.0      |
+          | T3(0.0, 0.0, amount = savingBalance)         |     0.0  |     0.0  | amount = savingBalance   |        0.0      |
+          | T4(0.0, -100.0, amount > savingBalance)      |     0.0  |  -100.0  | amount > savingBalance   |     -100.0      |
+          | T5(0.0, 100.0, amount < savingBalance)       |     0.0  |   100.0  | amount < savingBalance   |      100.0      |
+          | T6(-100.0, -100.0, amount = savingBalance)   |  -100.0  |  -100.0  | amount = savingBalance   |        0.0      |
+          | T7(-100.0, 0.0, amount < savingBalance)      |  -100.0  |     0.0  | amount < savingBalance |      100.0      |
+
 ### Seventh Test Case
 ### Eighth Test Case
 ### Ninth Test Case
