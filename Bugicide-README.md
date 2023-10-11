@@ -461,13 +461,13 @@ public double calcSavingWithdraw(double amount) {
               | Characteristics                       |       b1       |     b2     |     b3      |
               |---------------------------------------|----------------|------------|-------------|
               | C1 = relation of amount to 0          | Greater than 0 | Equal to 0 | Less than 0 |
-              | C2 = relation of checkingBalance to 0 | Greater than 0 | Equal to 0 | Less than 0 |
+              | C2 = relation of savingBalance to 0   | Greater than 0 | Equal to 0 | Less than 0 |
               
             - Identify (possible) values
               | Characteristics                       | b1    | b2    | b2     |
               |---------------------------------------|-------|-------|--------|
               | C1 = relation of amount to 0          | 100.0 |   0   | -100.0 |
-              | C2 = relation of checkingBalance to 0 | 100.0 |   0   | -100.0 |
+              | C2 = relation of savingBalance to 0   | 100.0 |   0   | -100.0 |
               
     - **Functionality-based characteristic**
         - Identify testable functions
@@ -509,7 +509,7 @@ public double calcSavingWithdraw(double amount) {
 
           | Test                                         | C1       | C2       | C3                       | Expected Result |
           |----------------------------------------------|----------|----------|--------------------------|-----------------|
-          | T1(100.0, 100.0, amount = checkingBalance)   |   100.0  |   100.0  | amount = savingBalance   |        0.0      |
+          | T1(100.0, 100.0, amount = savingBalance)     |   100.0  |   100.0  | amount = savingBalance   |        0.0      |
           | T2(100.0, 0.0, amount > savingBalance)       |   100.0  |     0.0  | amount > savingBalance   |     -100.0      |
           | T3(0.0, 0.0, amount = savingBalance)         |     0.0  |     0.0  | amount = savingBalance   |        0.0      |
           | T4(0.0, -100.0, amount > savingBalance)      |     0.0  |  -100.0  | amount > savingBalance   |     -100.0      |
