@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CalcSavingWithdrawTest {
 
     private Account account;
-    private double amount = 100.0;
+    private double amount = 200.0;
 
     @BeforeEach
     public void setUp() {
@@ -25,7 +25,7 @@ public class CalcSavingWithdrawTest {
     @Test
     public void testCalcSavingWithdrawNormal(){
         account.calcSavingTransfer(amount);
-        assertEquals(1900.0,account.getSavingBalance());
+        assertEquals(1800.0,account.getSavingBalance());
     }
 
     @Test
