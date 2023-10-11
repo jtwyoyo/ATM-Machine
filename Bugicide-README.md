@@ -518,6 +518,215 @@ public double calcSavingWithdraw(double amount) {
           | T7(-100.0, 0.0, amount < savingBalance)      |  -100.0  |     0.0  | amount < savingBalance |      100.0      |
 
 ### Seventh Test Case
+```
+public Account(int customerNumber, int pinNumber, double checkingBalance, double savingBalance) {
+		this.customerNumber = customerNumber;
+		this.pinNumber = pinNumber;
+		this.checkingBalance = checkingBalance;
+		this.savingBalance = savingBalance;
+	}
+```
+- Name of the test case: testConstructorA
+- Goal of the test case: To test the constructor Account(int customerNumber, int pinNumber, double checkingBalance, double savingBalance) such that it can create new account object and retain its data afterward.
+- Characteristics developed using Input Space Partitioning (ISP)
+    - **Interface-based characteristic**
+        - Identify testable functions
+            - Account(int customerNumber, int pinNumber, double checkingBalance, double savingBalance)
+        - Identify parameters, return types, return values, and exceptional behavior
+            - Parameters: int customerNumber, int pinNumber, double checkingBalance, double savingBalance
+            - Return Type: void
+            - Return value: none
+            - Exceptional behavior: nothing
+        - Model the input domain
+            - Develop characteristics
+                - C1 = relation of customerNumber to 0
+                - C2 = relation of pinNumber to 0
+                - C3 = relation of savingBalance to 0
+                - C4 = relation of checkingBalance to 0
+            - Partition characteristics
+
+              | Characteristics                       |       b1       |     b2     |     b3      |
+              |---------------------------------------|----------------|------------|-------------|
+              | C1 = relation of customerNumber to 0  | Greater than 0 | Equal to 0 | Less than 0 |
+              | C2 = relation of pinNumber to 0       | Greater than 0 | Equal to 0 | Less than 0 |
+              | C3 = relation of savingBalance to 0   | Greater than 0 | Equal to 0 | Less than 0 |
+              | C4 = relation of checkingBalance to 0 | Greater than 0 | Equal to 0 | Less than 0 |
+            - Identify (possible) values
+
+              | Characteristics                       | b1    | b2    | b2    |
+              |---------------------------------------|-------|-------|-------|
+              | C1 = relation of customerNumer to 0   | 1234  |   0   | -1234 |
+              | C2 = relation of pinNumber to 0       | 5678  |   0   | -5678 |
+              | C3 = relation of savingBalance to 0   | 1000  |   0   | -1000 |
+              | C4 = relation of checkingBalance to 0 | 1000  |   0   | -1000 |
+	- Combine partitions to define test requirements - Multiple Based Choice Coverage
+	            - Base Choices: (c1b1,c2b1,c3b1,c4b1), (c1b2,c2b2,c3b2,c4b2)
+	            - Test requirements: number of tests =  10
+	                - Feasibility Tests
+	                    - new Account(1234,5678,1000,1000)
+                            - new Account(0,0,0,0)
+                            - new Account(1234,5678,1000,-1000)
+                            - new Account(1234,5678,-1000,1000)
+                            - new Account(1234,-5678,1000,1000)
+                            - new Account(-1234,5678,1000,1000)
+                            - new Account(0,0,0,-1000)
+                            - new Account(0,0,-1000,0)
+                            - new Account(0,-5678,0,0)
+                            - new Account(-1234,0,0,0)
+   	- Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit.
+
+          | Test                     | C1     | C2      | C3    | C4    | Expected      |
+          |--------------------------|--------|---------|-------|-----------------------|
+          | T1(1234,5678,1000,1000)  |  1234  |   5678  |  1000 | 1000  |  CREATED      |
+          | T2(0,0,0,0)              |    0   |     0   |    0  |   0   |  CREATED      |
+          | T3(1234,5678,1000,-1000) |  1234  |   5678  |  1000 | -1000 |  CREATED      |
+          | T4(1234,5678,-1000,1000) |  1234  |   5678  | -1000 |  1000 |  CREATED      |
+          | T5(1234,-5678,1000,1000) |  1234  |  -5678  |  1000 |  1000 |  CREATED      |
+          | T6(-1234,5678,1000,1000) |  1234  |   5678  |  1000 |  1000 |  CREATED      |
+          | T7(0,0,0,-1000)          |    0   |    0    |   0   | -1000 |  CREATED      |
+   	  | T8(0,0,-1000,0)          |    0   |    0    | -1000 |   0   |  CREATED      |
+          | T9(0,-5678,0,0)          |    0   |  -5678  |   0   |   0   |  CREATED      |
+          | T10(-1234,0,0,0)         | -1234  |    0    |   0   |   0   |  CREATED      |
+   	  
+    - **Functionality-based characteristic**
+        - Identify testable functions
+            - Account(int customerNumber, int pinNumber, double checkingBalance, double savingBalance)
+        - Identify parameters, return types, return values, and exceptional behavior
+            - Parameters: int customerNumber, int pinNumber, double checkingBalance, double savingBalance
+            - Return type: void
+            - Return values: none
+            - Exceptional behavior: nothing
+        - Model the input domain
+            - Develop characteristics
+                - C1 = the created object is an instance of Account class
+                - C2 = the object retains 'customerNumber' value as provided
+                - C3 = the object retains 'pinNumber' value as provided
+                - C4 = the object retains 'savingBalance' value as provided
+                - C5 = the object retains 'checkingBalance' value as provided
+            - Partition characteristics 
+
+              | Characteristics                                             |  b1  |  b2   |
+              |-------------------------------------------------------------|------|-------|
+              | C1 = the created object is an instance of Account class     | True | False |
+              | C2 = the object retains 'customerNumber' value as provided  | True | False |
+              | C3 = the object retains 'pinNumber' value as provided       | True | False |
+              | C4 = the object retains 'savingBalance' value as provided   | True | False |
+              | C5 = the object retains 'checkingBalance' value as provided | True | False |
+            - Identify (possible) value **accountA = new account(1234, 5678, 1000, 1000) and accountB = new Object, will be used as pre-condition for testing**
+
+              | Characteristics                                             |    b1    |    b2    |
+              |-------------------------------------------------------------|----------|----------|
+              | C1 = the created object is an instance of Account class     | accountA | accountB |
+              | C2 = the object retains 'customerNumber' value as provided  |   1234   |     0    |
+              | C3 = the object retains 'pinNumber' value as provided       |   5678   |     0    |
+              | C4 = the object retains 'savingBalance' value as provided   |   1000   |     0    |
+              | C5 = the object retains 'checkingBalance' value as provided |   1000   |     0    |
+        - Combine partitions to define test requirements - Multiple Based Choice Coverage
+            - Base Choices: (c1b1,c2b1,c3b1,c4b1,c5b1), (c1b1,c2b1,c3b1,c4b1,c5b2)
+            - Test requirements: number of tests =  10
+                - Feasibility Tests
+                    - (accountA, 1234, 5678, 1000, 1000)
+                - Infeasibility Tests
+                    - **Every other cases**
+        - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit.
+
+          | Test                               | C1         |   C2        | C3       | C4       | C5      |  Expected      |
+          |------------------------------------|------------|-------------|----------|----------|---------|----------------|
+          | T11(accountA,1234,5678,1000,1000)  |  accountA  |   1234      | 5678     | 1000     | 1000    |  TRUE          |
+          
 ### Eighth Test Case
+```
+public Account(int customerNumber, int pinNumber) {
+		this.customerNumber = customerNumber;
+		this.pinNumber = pinNumber;
+	}
+```
+- Name of the test case: testConstructorB
+- Goal of the test case: To test the constructor Account(int customerNumber, int pinNumber) such that it can create new account object and retain its data afterward.
+- Characteristics developed using Input Space Partitioning (ISP)
+    - **Interface-based characteristic**
+        - Identify testable functions
+            - Account(int customerNumber, int pinNumber)
+        - Identify parameters, return types, return values, and exceptional behavior
+            - Parameters: int customerNumber, int pinNumber
+            - Return Type: void
+            - Return value: none
+            - Exceptional behavior: nothing
+        - Model the input domain
+            - Develop characteristics
+                - C1 = relation of customerNumber to 0
+                - C2 = relation of pinNumber to 0
+            - Partition characteristics
+
+              | Characteristics                       |       b1       |     b2     |     b3      |
+              |---------------------------------------|----------------|------------|-------------|
+              | C1 = relation of customerNumber to 0  | Greater than 0 | Equal to 0 | Less than 0 |
+              | C2 = relation of pinNumber to 0       | Greater than 0 | Equal to 0 | Less than 0 |
+            - Identify (possible) values
+
+              | Characteristics                       | b1    | b2    | b2    |
+              |---------------------------------------|-------|-------|-------|
+              | C1 = relation of customerNumer to 0   | 1234  |   0   | -1234 |
+              | C2 = relation of pinNumber to 0       | 5678  |   0   | -5678 |
+	- Combine partitions to define test requirements - Multiple Based Choice Coverage
+	            - Base Choices: (c1b1,c2b1), (c1b2,c2b2)
+	            - Test requirements: number of tests =  6
+	                - Feasibility Tests
+	                    - new Account(1234,5678)
+                            - new Account(0,0)
+                            - new Account(1234,-5678)
+                            - new Account(-1234,5678)
+                            - new Account(0,-5678)
+                            - new Account(-1234,0)
+   	- Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit.
+
+          | Test                     | C1     | C2      |  Expected      |
+          |--------------------------|--------|---------|----------------|
+          | T1(1234,5678)            |  1234  |   5678  |    CREATED     | 
+          | T2(0,0)                  |    0   |     0   |    CREATED     |
+          | T3(1234,-5678)           |  1234  |   5678  |    CREATED     |
+          | T4(-1234,5678)           |  1234  |   5678  |    CREATED     |
+          | T5(0,-5678)              |  1234  |  -5678  |    CREATED     |
+          | T6(-1234,0)              |  1234  |   5678  |    CREATED     |
+   	  
+    - **Functionality-based characteristic**
+        - Identify testable functions
+            - Account(int customerNumber, int pinNumber)
+        - Identify parameters, return types, return values, and exceptional behavior
+            - Parameters: int customerNumber, int pinNumber
+            - Return type: void
+            - Return values: none
+            - Exceptional behavior: nothing
+        - Model the input domain
+            - Develop characteristics
+                - C1 = the created object is an instance of Account class
+                - C2 = the object retains 'customerNumber' value as provided
+                - C3 = the object retains 'pinNumber' value as provided
+            - Partition characteristics 
+
+              | Characteristics                                             |  b1  |  b2   |
+              |-------------------------------------------------------------|------|-------|
+              | C1 = the created object is an instance of Account class     | True | False |
+              | C2 = the object retains 'customerNumber' value as provided  | True | False |
+              | C3 = the object retains 'pinNumber' value as provided       | True | False |
+            - Identify (possible) value **accountA = new account(1234, 5678) and accountB = new Object, will be used as pre-condition for testing**
+
+              | Characteristics                                             |    b1    |    b2    |
+              |-------------------------------------------------------------|----------|----------|
+              | C1 = the created object is an instance of Account class     | accountA | accountB |
+              | C2 = the object retains 'customerNumber' value as provided  |   1234   |     0    |
+              | C3 = the object retains 'pinNumber' value as provided       |   5678   |     0    |
+        - Combine partitions to define test requirements - Multiple Based Choice Coverage
+            - Base Choices: (c1b1,c2b1,c3b1), (c1b1,c2b1,c3b2)
+            - Test requirements: number of tests =  6
+                - Feasibility Tests
+                    - (accountA, 1234, 5678)
+                - Infeasibility Tests
+                    - **Every other cases**
+        - Derive test values and expected values. These are the values that you have to use when you implement test cases in JUnit.
+
+          | Test                               | C1         |   C2        | C3       |  Expected      |
+          |------------------------------------|------------|-------------|----------|----------------|
+          | T11(accountA,1234,5678,1000,1000)  |  accountA  |   1234      | 5678     |  TRUE          |
 ### Ninth Test Case
 ### Tenth Test case
