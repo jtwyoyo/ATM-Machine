@@ -60,7 +60,7 @@ public class ConstructorTest {
             //T5: customerNumber=0, pinNumber<0
             new Account(0,-5678 );
             //T6: customerNumber<0, pinNumber=0
-            new Account(-5678,0 );
+            new Account(-1234,0 );
         } catch (Exception e) {
             fail(e.getMessage());
         }
