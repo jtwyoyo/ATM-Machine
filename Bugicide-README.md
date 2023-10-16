@@ -357,8 +357,8 @@ public double calcCheckingDeposit(double amount) {
 
           | Test                                         | C1       | C2       | C3                          | Expected Result |
           |----------------------------------------------|----------|----------|-----------------------------|-----------------|
-          | T1(50.0, 100.0,  newcheckingBalance > amount)|   100.0  |   100.0  | newcheckingBalance > amount |       200.0     |
-          | T2(0.0, 100.0,   newcheckingBalance > amount)|     0.0  |     0.0  | newcheckingBalance > amount |       0.0       |
+          | T1(50.0, 100.0,  newcheckingBalance > amount)|    50.0  |   100.0  | newcheckingBalance > amount |       150.0     |
+          | T2(0.0, 100.0,   newcheckingBalance > amount)|     0.0  |   100.0  | newcheckingBalance > amount |       100.0     |
           | T3(-50.0, 100.0, newcheckingBalance > amount)|   -50.0  |   100.0  | newcheckingBalance > amount |       50.0      |
 
 ### Fifth Test Case
@@ -431,8 +431,8 @@ public double calcSavingDeposit(double amount) {
 
           | Test                                         | C1       | C2       | C3                        | Expected Result |
           |----------------------------------------------|----------|----------|---------------------------|-----------------|
-          | T1(50.0, 100.0,  newSavingBalance > amount)	 |   100.0  |   100.0  | newSavingBalance > amount |       200.0     |
-          | T2(0.0, 100.0,   newSavingBalance > amount)  |     0.0  |     0.0  | newSavingBalance > amount |       0.0       |
+          | T1(50.0, 100.0,  newSavingBalance > amount)	 |    50.0  |   100.0  | newSavingBalance > amount |       150.0     |
+          | T2(0.0, 100.0,   newSavingBalance > amount)  |     0.0  |   100.0  | newSavingBalance > amount |       100.0     |
           | T3(-50.0, 100.0, newSavingBalance > amount)  |   -50.0  |   100.0  | newSavingBalance > amount |       50.0      |
 ### Sixth Test Case
 ```
