@@ -236,7 +236,7 @@ public double calcCheckingWithdraw(double amount) {
               | C2 = relation of checkingBalance to 0 | Greater than 0 | Equal to 0 | Less than 0 |
             - Identify (possible) values
 
-              | Characteristics                       | b1    | b2    | b2     |
+              | Characteristics                       | b1    | b2    | b3     |
               |---------------------------------------|-------|-------|--------|
               | C1 = relation of amount to 0          | 100.0 |   0   | -100.0 |
               | C2 = relation of checkingBalance to 0 | 100.0 |   0   | -100.0 |
@@ -316,7 +316,7 @@ public double calcCheckingDeposit(double amount) {
               | C2 = relation of checkingBalance to 0 | Greater than 0 | Equal to 0 | Less than 0 |
             - Identify (possible) values
 
-              | Characteristics                       | b1    | b2    | b2     |
+              | Characteristics                       | b1    | b2    | b3     |
               |---------------------------------------|-------|-------|--------|
               | C1 = relation of amount to 0          | 50.0  |   0   | -50.0  |
               | C2 = relation of checkingBalance to 0 | 100.0 |   0   | -100.0 |
